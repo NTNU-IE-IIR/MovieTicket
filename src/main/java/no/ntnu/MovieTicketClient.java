@@ -6,17 +6,15 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Client {
+public class MovieTicketClient extends Thread {
   public static final int TCP_PORT = 1238;
   private Socket socket;
   private BufferedReader reader;
   private PrintWriter writer;
   private boolean running;
 
-  public static void main(String[] args) {
-  }
 
-  public Client() {
+  public MovieTicketClient(MovieTicketServer movieTicketServer, String name, int numberOfTickets)  {
     this.running = false;
   }
 

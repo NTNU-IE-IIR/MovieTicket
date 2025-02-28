@@ -4,15 +4,14 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class MultiThreadedServer {
+public class MovieTicketServer extends Thread {
   public static final int TCP_PORT = 1238;
   private boolean isRunning;
 
   public static void main(String[] args) {
-    MultiThreadedServer multiThreadedServer = new MultiThreadedServer();
   }
 
-  public MultiThreadedServer() {
+  public MovieTicketServer(String name, int tickets) {
     try (ServerSocket serverSocket = new ServerSocket(TCP_PORT)) {
       isRunning = true;
       while (isRunning) {
