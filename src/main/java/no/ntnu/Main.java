@@ -1,8 +1,5 @@
 package no.ntnu;
 
-import no.ntnu.MovieTicketServer;
-import no.ntnu.MovieTicketClient;
-
 public class Main {
     public static void main(String[] args) {
         MovieTicketServer movieTicketServer = new MovieTicketServer(

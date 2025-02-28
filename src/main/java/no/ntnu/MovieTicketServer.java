@@ -1,31 +1,23 @@
 package no.ntnu;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-
 public class MovieTicketServer extends Thread {
-  public static final int TCP_PORT = 1238;
-  private boolean isRunning;
+  private int availableTickets;
+  private String movieName;
 
   public static void main(String[] args) {
   }
 
-  public MovieTicketServer(String name, int tickets) {
-    try (ServerSocket serverSocket = new ServerSocket(TCP_PORT)) {
-      isRunning = true;
-      while (isRunning) {
-        Socket socket = serverSocket.accept();
-        ClientHandler clientHandler = new ClientHandler(socket);
-        try {
-          clientHandler.start();
-        } catch (IllegalThreadStateException e) {
-          System.out.println("Failed to start the client handler: " + e.getMessage());
-        }
-      }
-    } catch (IOException e) {
-      System.out.println("Could not start the server.");
-      e.printStackTrace();
+  public MovieTicketServer(String movieName, int tickets) {
+    this.movieName = movieName;
+    this.availableTickets = tickets;
+  }
+
+  public synchronized void bookTicket(int ticketsToBook) {
+    if (this.availableTickets >= ticketsToBook) {
+      availableTickets -= ticketsToBook;
+      System.out.println(ticketsToBook + " tickets booked. Remaining tickets: " + availableTickets);
+    } else {
+      System.out.println("Not enough available tickets.");
     }
   }
 }
